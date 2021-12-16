@@ -1,7 +1,13 @@
 package ru.netology.manager;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.netology.domain.Film;
 import ru.netology.repository.PosterRepository;
+
+@Data
+@NoArgsConstructor
 
 public class PosterManager {
     // создаем репозиторий
@@ -10,6 +16,7 @@ public class PosterManager {
     public PosterManager(PosterRepository repository) {
         this.repository = repository;
     }
+
 
     //добавить фильм
     public void add(Film newFilm) {
