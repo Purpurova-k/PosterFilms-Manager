@@ -6,9 +6,22 @@ public class PosterRepository {
     // Массив с фильмами
     private Film[] films = new Film[0];
 
+
     // Показывает все фильмы в массиве
     public Film[] findAll() {
-        return films;
+        int countFilms = 10;
+        int resultLength;
+        if (films.length > countFilms) {
+            resultLength = countFilms;
+        } else {
+            resultLength = films.length;
+        }
+        Film[] result = new Film[resultLength];
+        for (int i = 0; i < result.length; i++) {
+            int index = films.length - i - 1;
+            result[i] = films[index];
+        }
+        return result;
     }
 
 
@@ -36,7 +49,7 @@ public class PosterRepository {
 
 
     // Удаляет фильм по id
-    public void removeById (int id) {
+    public void removeById(int id) {
         int length = films.length - 1;
         Film[] tmp = new Film[length];
         int index = 0;
