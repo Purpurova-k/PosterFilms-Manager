@@ -19,8 +19,8 @@ public class PosterManager {
 
 
     //добавить фильм
-    public void add(Film newFilm) {
-        repository.save(newFilm);
+    public void add(Film film) {
+        repository.save(film);
     }
 
 

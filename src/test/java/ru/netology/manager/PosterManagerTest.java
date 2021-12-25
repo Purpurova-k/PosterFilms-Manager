@@ -92,6 +92,4 @@ class PosterManagerTest {
 
         verify(repository).removeAll();
     }
-
-
 }

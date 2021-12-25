@@ -26,13 +26,13 @@ public class PosterRepository {
 
 
     // Добавляет фильм в массив
-    public void save(Film newFilm) {
+    public void save(Film film) {
         int length = films.length + 1;
         Film[] tmp = new Film[length];
 
         System.arraycopy(films, 0, tmp, 0, films.length);
         int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = newFilm;
+        tmp[lastIndex] = film;
         films = tmp;
     }
 
