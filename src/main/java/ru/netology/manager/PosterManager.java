@@ -1,47 +1,55 @@
 package ru.netology.manager;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.netology.domain.Film;
+import ru.netology.repository.PosterRepository;
+
+@Data
+@NoArgsConstructor
 
 public class PosterManager {
+    // создаем репозиторий
+    private PosterRepository repository;
 
-    // Создаем пустой репозиторий для хранения фильмов
-    private Film[] films = new Film[0];
-
-    // Макс кол-во фильмов который должен выводить менеджер
-    private int countFilms = 10;
-
-    public PosterManager(int countFilms) {
-        this.countFilms = countFilms;
-    }
-
-    public PosterManager() {
+    public PosterManager(PosterRepository repository) {
+        this.repository = repository;
     }
 
 
-    // Добавление фильма
-    public void addFilm(Film newFilm) {
-        int length = films.length + 1;
-        Film[] tmp = new Film[length];
-
-        System.arraycopy(films, 0, tmp, 0, films.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = newFilm;
-        films = tmp;
+    //добавить фильм
+    public void add(Film film) {
+        repository.save(film);
     }
 
-    // Показать все добавленные фильмы (не более 10)
+
+    // показать все фильмы из репозитория
     public Film[] getAll() {
-        int resultLength;
-        if (films.length > countFilms) {
-            resultLength = countFilms;
-        } else {
-            resultLength = films.length;
-        }
-        Film[] result =  new Film[resultLength];
+        Film[] films = repository.findAll();
+        Film[] result = new Film[films.length];
         for (int i = 0; i < result.length; i++) {
             int index = films.length - i - 1;
             result[i] = films[index];
         }
         return result;
+    }
+
+
+    // найти фильм
+    public Film findById(int id) {
+        return repository.findById(id);
+    }
+
+
+    // удалить фильм
+    public void removeById(int id) {
+        repository.removeById(id);
+    }
+
+
+    // удалить все фильмы
+    public void removeAll() {
+        repository.removeAll();
     }
 }
